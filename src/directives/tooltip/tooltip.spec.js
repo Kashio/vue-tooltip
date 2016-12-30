@@ -43,13 +43,13 @@ describe('tooltip', () => {
 
       tooltip.inserted(el, binding);
 
-      expect(createTooltipSpy).toHaveBeenCalled();
-      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($el.mouseenter).toEqual(jasmine.any(Function));
       expect($el.mouseleave).toEqual(jasmine.any(Function));
 
       $el.trigger('mouseenter');
 
+      expect(createTooltipSpy).toHaveBeenCalled();
+      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($tooltip.css('opacity')).toEqual('1');
       expect($body.children('.' + TEST_TOOLTIP_CLASS).length === 1).toBeTruthy();
 
@@ -69,13 +69,13 @@ describe('tooltip', () => {
 
       tooltip.inserted(el, binding);
 
-      expect(createTooltipSpy).toHaveBeenCalled();
-      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($el.mouseenter).toEqual(jasmine.any(Function));
       expect($el.mouseleave).toEqual(jasmine.any(Function));
 
       $el.trigger('mouseenter');
 
+      expect(createTooltipSpy).toHaveBeenCalled();
+      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($tooltip.css('opacity')).toEqual('1');
       expect($body.children('.' + TEST_TOOLTIP_CLASS).length === 1).toBeTruthy();
 
