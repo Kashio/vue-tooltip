@@ -19,8 +19,9 @@ export const tooltip = {
   inserted: (el, binding) => {
     const $body = $('body');
     const $el = $(el);
-    const $tooltip = createTooltip($body, $el, binding);
+    let $tooltip;
     $el.mouseenter(() => {
+      $tooltip = createTooltip($body, $el, binding);
       $tooltip
         .stop()
         .hide()
