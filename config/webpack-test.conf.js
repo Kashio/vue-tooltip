@@ -9,21 +9,17 @@ module.exports = {
     ],
     loaders: [
       {
-        test: /.json$/,
-        loader: 'json'
+        test: /\.woff2?$/i,
+        loader: 'url?limit=8192'
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.s?css$/,
         loaders: 'style!css!sass'
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel'
-      },
-      {
-        test: /.vue$/,
-        loader: 'vue'
       }
     ]
   },
