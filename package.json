@@ -1,6 +1,6 @@
 {
   "name": "@kashio/vue-tooltip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue.js tooltip directive",
   "main": "dist/index.js",
   "repository": {
