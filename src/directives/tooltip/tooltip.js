@@ -81,7 +81,6 @@ function positionTooltipToTop($el, $tooltip, $arrow, binding) {
 }
 
 function positionTooltipToRight($el, $tooltip, $arrow, binding) {
-  console.log('right position fn');
   $tooltip.css({
     top: $el.offset().top + ($el.outerHeight() / 2) - ($tooltip.outerHeight() / 2),
     left: $el.offset().left + $el.outerWidth() + TOOLTIP_ARROW_BORDER_WIDTH + (binding.value.margin || TOOLTIP_DEFAULT_MARGIN)
