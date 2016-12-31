@@ -19,9 +19,8 @@ export const tooltip = {
   inserted: (el, binding) => {
     const $body = $('body');
     const $el = $(el);
-    let $tooltip;
+    const $tooltip = createTooltip($body, $el, binding);
     $el.mouseenter(() => {
-      $tooltip = createTooltip($body, $el, binding);
       $tooltip
         .stop()
         .hide()
@@ -35,12 +34,18 @@ export const tooltip = {
           $tooltip.detach();
         });
     });
+    $(window).resize(() => {
+      $body.append($tooltip);
+      POSITION_FN[binding.value.position || TOOLTIP_DEFAULT_POSITION]($el, $tooltip, $tooltip.$arrow, binding);
+      $tooltip.detach();
+    });
   }
 };
 
 function createTooltip($body, $el, binding) {
   const $arrow = createTooltipArrow();
   const $tooltip = $(document.createElement('span'));
+  $tooltip.$arrow = $arrow;
   $tooltip.html(binding.value.message);
   $tooltip.append($arrow);
   if (binding.value.color) {
@@ -76,6 +81,7 @@ function positionTooltipToTop($el, $tooltip, $arrow, binding) {
 }
 
 function positionTooltipToRight($el, $tooltip, $arrow, binding) {
+  console.log('right position fn');
   $tooltip.css({
     top: $el.offset().top + ($el.outerHeight() / 2) - ($tooltip.outerHeight() / 2),
     left: $el.offset().left + $el.outerWidth() + TOOLTIP_ARROW_BORDER_WIDTH + (binding.value.margin || TOOLTIP_DEFAULT_MARGIN)
