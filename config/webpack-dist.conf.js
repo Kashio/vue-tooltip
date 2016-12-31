@@ -49,7 +49,7 @@ module.exports = {
     filename: '[name].js'
   },
   entry: {
-    index: `./${conf.path.src('directives', 'tooltip', 'tooltip.js')}`,
+    index: `./${conf.path.src('index.js')}`,
     vendor: [
       'vue'
     ]

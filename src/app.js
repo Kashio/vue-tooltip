@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import './css/index.scss';
-import './directives';
+import TooltipPlugin from './index.js';
+
+Vue.use(TooltipPlugin);
 
 export default new Vue({
   el: '#app',
