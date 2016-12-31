@@ -1,6 +1,10 @@
 # Vue.js tooltip directive
+[![NPM](https://nodei.co/npm/@kashio/vue-tooltip.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@kashio/vue-tooltip/)
+
 [![Build status](https://api.travis-ci.org/Kashio/vue-tooltip.svg?branch=master)](https://travis-ci.org/Kashio/vue-tooltip)
 [![Coverage Status](https://coveralls.io/repos/github/Kashio/vue-tooltip/badge.svg?branch=master)](https://coveralls.io/github/Kashio/vue-tooltip?branch=master)
+[![Dependency Status](https://david-dm.org/kashio/vue-tooltip.svg)](https://david-dm.org/Kashio/vue-tooltip)
+[![devDependency Status](https://david-dm.org/Kashio/vue-tooltip/dev-status.svg)](https://david-dm.org/Kashio/vue-tooltip?type=dev)
 
 ## Basic usage
 ```js
