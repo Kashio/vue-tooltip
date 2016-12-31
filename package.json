@@ -1,5 +1,5 @@
 {
-  "name": "vue-tooltip",
+  "name": "@kashio/vue-tooltip",
   "version": "1.0.0",
   "description": "Vue.js tooltip directive",
   "main": "dist/index.js",
@@ -73,7 +73,9 @@
     "serve": "gulp serve",
     "serve:dist": "gulp serve:dist",
     "test": "gulp test",
-    "test:auto": "gulp test:auto"
+    "test:auto": "gulp test:auto",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "eslintConfig": {
     "root": true,
