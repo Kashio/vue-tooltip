@@ -22,16 +22,25 @@ describe('tooltip', () => {
   describe('inserted()', () => {
     const TEST_TOOLTIP_CLASS = 'test_tooltip';
     const $tooltip = $(document.createElement('div'));
+    $tooltip.$arrow = $(document.createElement('span'));
     $tooltip.addClass(TEST_TOOLTIP_CLASS);
     const createTooltipSpy = jasmine.createSpy('createTooltipSpy').and.callFake(() => {
       return $tooltip;
     });
+    const positionTooltipToRightSpy = jasmine.createSpy('positionTooltipToRightSpy').and.callFake(() => {
+      $tooltip.css({
+        top: 5,
+        left: 5
+      });
+    });
     beforeEach(() => {
       $.fx.off = true;
       TooltipRewireAPI.__Rewire__('createTooltip', createTooltipSpy);
+      TooltipRewireAPI.__Rewire__('POSITION_FN', {right: positionTooltipToRightSpy});
     });
     afterEach(() => {
       TooltipRewireAPI.__ResetDependency__('createTooltip');
+      TooltipRewireAPI.__ResetDependency__('POSITION_FN');
     });
     it('should have mouseenter and mouseleave event listeners with no fade provided', () => {
       const $body = $('body');
@@ -43,13 +52,13 @@ describe('tooltip', () => {
 
       tooltip.inserted(el, binding);
 
+      expect(createTooltipSpy).toHaveBeenCalled();
+      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($el.mouseenter).toEqual(jasmine.any(Function));
       expect($el.mouseleave).toEqual(jasmine.any(Function));
 
       $el.trigger('mouseenter');
 
-      expect(createTooltipSpy).toHaveBeenCalled();
-      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($tooltip.css('opacity')).toEqual('1');
       expect($body.children('.' + TEST_TOOLTIP_CLASS).length === 1).toBeTruthy();
 
@@ -69,19 +78,61 @@ describe('tooltip', () => {
 
       tooltip.inserted(el, binding);
 
+      expect(createTooltipSpy).toHaveBeenCalled();
+      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($el.mouseenter).toEqual(jasmine.any(Function));
       expect($el.mouseleave).toEqual(jasmine.any(Function));
 
       $el.trigger('mouseenter');
 
-      expect(createTooltipSpy).toHaveBeenCalled();
-      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
       expect($tooltip.css('opacity')).toEqual('1');
       expect($body.children('.' + TEST_TOOLTIP_CLASS).length === 1).toBeTruthy();
 
       $el.trigger('mouseleave');
 
       expect($body.children('.' + TEST_TOOLTIP_CLASS).length === 0).toBeTruthy();
+    });
+    it('should reposition tooltip with no position provided upon window resize', () => {
+      const $body = $('body');
+      const el = document.createElement('div');
+      const binding = {
+        value: {
+          position: 'right'
+        }
+      };
+      const $el = $(el);
+
+      tooltip.inserted(el, binding);
+
+      expect(createTooltipSpy).toHaveBeenCalled();
+      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
+      expect($el.mouseenter).toEqual(jasmine.any(Function));
+      expect($el.mouseleave).toEqual(jasmine.any(Function));
+
+      $(window).trigger('resize');
+
+      expect(positionTooltipToRightSpy).toHaveBeenCalled();
+      expect(positionTooltipToRightSpy).toHaveBeenCalledWith($el, $tooltip, $tooltip.$arrow, binding);
+    });
+    it('should reposition tooltip with position provided upon window resize', () => {
+      const $body = $('body');
+      const el = document.createElement('div');
+      const binding = {
+        value: {}
+      };
+      const $el = $(el);
+
+      tooltip.inserted(el, binding);
+
+      expect(createTooltipSpy).toHaveBeenCalled();
+      expect(createTooltipSpy).toHaveBeenCalledWith($body, $el, binding);
+      expect($el.mouseenter).toEqual(jasmine.any(Function));
+      expect($el.mouseleave).toEqual(jasmine.any(Function));
+
+      $(window).trigger('resize');
+
+      expect(positionTooltipToRightSpy).toHaveBeenCalled();
+      expect(positionTooltipToRightSpy).toHaveBeenCalledWith($el, $tooltip, $tooltip.$arrow, binding);
     });
   });
   describe('createTooltip()', () => {
