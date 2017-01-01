@@ -39,7 +39,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     }),
-    new ExtractTextPlugin("style.css"),
+    new ExtractTextPlugin("style.css")
   ],
   debug: true,
   devtool: 'source-map',
