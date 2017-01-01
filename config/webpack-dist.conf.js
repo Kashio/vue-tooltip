@@ -41,17 +41,15 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
     }),
-    new ExtractTextPlugin('index-[contenthash].css'),
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})
+    new ExtractTextPlugin('index.css')
   ],
   output: {
     path: path.join(process.cwd(), conf.paths.dist),
-    filename: '[name].js'
+    filename: '[name].js',
+    library: 'VueTooltip',
+    libraryTarget: 'commonjs2'
   },
   entry: {
-    index: `./${conf.path.src('index.js')}`,
-    vendor: [
-      'vue'
-    ]
+    index: `./${conf.path.src('index.js')}`
   }
 };
