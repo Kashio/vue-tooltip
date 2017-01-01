@@ -9,7 +9,9 @@
 ## Basic usage
 ```js
 import Vue from 'vue';
-import VueTooltip from 'vue-tooltip';
+
+import { VueTooltip } from '@kashio/vue-tooltip';
+import '@kashio/vue-tooltip/dist/index.css';
 
 Vue.use(VueTooltip);
 
