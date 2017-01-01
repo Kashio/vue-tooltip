@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import './css/index.scss';
-import TooltipPlugin from './index.js';
 
-Vue.use(TooltipPlugin);
+import { VueTooltip } from '../dist/index.js';
+import '../dist/index.css';
+
+Vue.use(VueTooltip);
 
 export default new Vue({
   el: '#app',
